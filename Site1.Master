@@ -1,0 +1,227 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Marathone.Site1" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <title>Marathone</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- DataTables CSS -->
+    <link href="datatables/css/dataTables.dataTables.min.css" rel="stylesheet" />
+    <!-- FontAwesome CSS -->
+    <link href="fontawesome/css/all.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="Bootstrap/css/customstylesheet.css" rel="stylesheet" />
+
+    <style>
+        body, html {
+            background-color: #f3f8ff !important;
+            min-height: 100vh;
+        }
+
+        .container, .content-wrapper, .main-content, #ContentPlaceHolder1 {
+            background-color: #f3f8ff !important;
+        }
+
+        #ContentPlaceHolder1 {
+            padding: 20px;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+            box-shadow: 0 4px 15px rgba(13, 110, 253, 0.2);
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2) !important;
+            transform: translateY(-2px);
+        }
+
+        .btn-warning {
+            background: linear-gradient(45deg, #ffc107, #ffb300);
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-warning:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+        }
+
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: rgba(0, 0, 0, 0.15);
+                border-radius: 12px;
+                margin-top: 15px;
+                padding: 15px;
+            }
+
+            .navbar-nav .nav-link {
+                text-align: center;
+            }
+        }
+
+        .menu-item {
+            display: block;
+            padding: 12px 16px;
+            margin: 4px 0;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            background: #FFFFFF;
+            border: 1px solid #E1ECFF;
+            transition: all 0.2s ease;
+        }
+
+        .menu-item:hover {
+            background: #D6ECFF;
+            border-color: #BFDFFF;
+        }
+
+        .menu-item.active {
+            background: #B7DCFF;
+            font-weight: 600;
+        }
+
+        .menu-item.logout {
+            margin-top: 15px;
+            color: #C0392B;
+            font-weight: 600;
+        }
+
+        .sidebar {
+            width: 260px;
+            background-color: #EAF4FF;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .sidebar-header {
+            background-color: #FF0000;
+            height: 1.7cm;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222222;
+        }
+
+        .main-content-area {
+            flex-grow: 1;
+            background-color: #F7FAFF;
+        }
+    </style>
+
+    <!-- jQuery & Bootstrap JS (place before closing </head> but after CSS) -->
+    <script src="Bootstrap/js/jquery-3.6.0.min.js"></script>
+    <script src="Bootstrap/js/popper.min.js"></script>
+    <script src="Bootstrap/js/bootstrap.min.js"></script>
+    <script src="datatables/js/dataTables.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <!-- Navbar -->
+        <!-- Navbar - Everything in one straight row on desktop -->
+<nav class="navbar navbar-expand-lg navbar-light py-3 shadow-sm">
+    <div class="container-xl">
+        <!-- Logo / Brand -->
+        <a class="navbar-brand fw-bold text-white d-flex align-items-center" href="homepage.aspx">
+            <span class="fs-3" style="letter-spacing: 1px;">MARATHONE</span>
+        </a>
+
+        <!-- Mobile toggle -->
+        <button class="navbar-toggler border-0 text-white" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content (menu + buttons) -->
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Centered Menu Items -->
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0"> <!-- mx-auto centers the nav items -->
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-medium px-4 py-2 rounded-3" href="homepage.aspx">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-medium px-4 py-2 rounded-3" href="about.aspx">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white fw-medium px-4 py-2 rounded-3" href="terms.aspx">Terms & Conditions</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white fw-medium px-4 py-2 rounded-3"
+                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-lg mt-2">
+                        <li><a class="dropdown-item" href="events.aspx">Events</a></li>
+                        <li><a class="dropdown-item" href="gallery.aspx">Gallery</a></li>
+                        <li><a class="dropdown-item" href="contact.aspx">Contact</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- Right-side Login/Register Buttons (only visible when NOT logged in) -->
+            <div class="d-flex gap-3" id="authButtons" runat="server">
+                <a href="Login.aspx" class="btn btn-outline-light fw-medium px-4 rounded-pill border-2">
+                    Login
+                </a>
+                <a href="User_Registration.aspx" class="btn btn-warning text-dark fw-bold px-5 rounded-pill shadow-sm">
+                    Register Now
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+        <!-- Main Layout: Sidebar (only for logged-in users) + Content -->
+        <div class="d-flex" style="min-height: calc(100vh - 76px);"> <!-- Adjust for navbar height -->
+            <asp:Panel ID="sidebarPanel" runat="server" >
+                <div id="sidebar" class="sidebar">
+                    <div class="sidebar-header">
+                        <h4 class="fw-bold mb-0">TOURNAMENT</h4>
+                    </div>
+                    <div style="padding: 4px;">
+                        <a href="Profile.aspx" class="menu-item">Profile Update</a>
+                        <a href="create_tournament.aspx" class="menu-item">Create Tournament</a>
+                        <a href="Team_create.aspx" class="menu-item">Create Teams</a>
+                        <a href="Tornament_Registration_Form.aspx" class="menu-item">Tournament Registration</a>
+                        <a href="Tornament_Live_Page.aspx" class="menu-item">Live Tournament</a>
+                        <a href="RFID_TAG_Assign.aspx" class="menu-item">RFID Tag Assign</a>
+                        <a href="Notice_News_Update.aspx" class="menu-item">Settings</a>
+                        <a href="view_all_tournaments.aspx" class="menu-item">View All Tournament</a>
+                        <a href="UserInfo.aspx" class="menu-item">User Info</a>
+                        <a href="ViewAllTeam.aspx" class="menu-item">View All Teams</a>
+                        <a href="settings.aspx" class="menu-item">Settings</a>
+                        <a href="logout.aspx" class="menu-item logout">Logout</a>
+                    </div>
+                </div>
+            </asp:Panel>
+
+            <!-- Main Content Area -->
+            <div class="main-content-area p-4">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" />
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-auto">
+            <div class="container-fluid bg-dark text-center py-3">
+                <p class="text-white mb-0">
+                    &copy; All rights reserved.
+                    <a class="footerlinks text-white" href="#" target="_blank">Simple Snippet</a>
+                </p>
+            </div>
+        </footer>
+    </form>
+</body>
+</html>
